@@ -17,8 +17,10 @@ const irregularPlurals = {
 };
 
 const irregularVerbs = {
-    pay: "pays",
-    say: "says",
+    buy: "buys",
+    have: "has",
+    be: "is",
+    run: "runs", // added because "ran" is also in your list
     // Add more as needed
 };
 
@@ -34,6 +36,7 @@ const pluralizeVerb = (verb) => {
         return verb + "s";
     }
 };
+
 
 const pluralizeNoun = (noun) => {
     if (irregularPlurals[noun]) {
