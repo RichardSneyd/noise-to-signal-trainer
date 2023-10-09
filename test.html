@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Phrase Generator Test</title>
+  <script type="module">
+    import generatePhrase from './phrase-gen.js'; // Update the path to your JS module
+
+    // Function to append phrase to the page
+    const appendPhraseToPage = (phrase) => {
+      const phraseElement = document.createElement('p');
+      phraseElement.innerText = phrase;
+      document.body.appendChild(phraseElement);
+    };
+
+    window.addEventListener('load', () => {
+      // Generate and append four phrases
+      for (let i = 0; i < 40; i++) {
+        const phrase = generatePhrase(Math.random() * 7 + 3, 0, 0, 0);  // You can change the number 8 to generate phrases of different lengths
+        appendPhraseToPage(phrase);
+      }
+    });
+  </script>
+</head>
+<body>
+  <h1>Generated Phrases:</h1>
+</body>
+</html>

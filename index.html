@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Background Noise Filter Trainer</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container mt-5">
+    <h1>Background Noise Filter Trainer</h1>
+    <div class="form-group">
+      <label for="phraseLength">Select Phrase Length:</label>
+      <select class="form-control" id="phraseLength">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select>
+    </div>
+    <button id="playButton" class="btn btn-primary">Play</button>
+    <div id="output"></div>
+  </div>
+
+  <script>
+
+    const words = ['car', 'run', 'big', 'cat', 'fast', 'baby']; // Sample words
+    const phraseLengthSelector = document.getElementById('phraseLength');
+    const playButton = document.getElementById('playButton');
+    const output = document.getElementById('output');
+
+    // Function to generate random background noise
+    const generateNoise = () => {
+      // Implement background noise generation
+    };
+
+    // Function to generate a phrase
+    const generatePhrase = (length) => {
+      let phrase = '';
+      for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * words.length);
+        phrase += `${words[randomIndex]} `;
+      }
+      return phrase.trim();
+    };
+
+    // Function to play the sound
+    const playSound = (phrase) => {
+      // Implement Text-To-Speech (TTS) feature here
+      // and mix it with background noise using the Web Audio API
+    };
+
+    // Function to listen to user's voice
+    const listenToUser = () => {
+      // Implement Speech-To-Text (STT) feature here
+    };
+
+    playButton.addEventListener('click', () => {
+      const length = parseInt(phraseLengthSelector.value, 10);
+      const phrase = generatePhrase(length);
+      output.innerHTML = `Playing: ${phrase}`;
+      playSound(phrase);
+      listenToUser();
+    });
+  </script>
+</body>
+</html>
+
+const length = 8; // Change this number for your desired phrase length
+const phrase = generatePhrase(length);
+console.log(phrase);
