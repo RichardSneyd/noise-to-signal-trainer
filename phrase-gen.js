@@ -9,6 +9,7 @@ const startsWithVowelSound = (word) => {
 
 const irregularPlurals = {
     box: "boxes",
+    fox: "foxes",
     man: "men",
     child: "children",
     fish: "fishes",
