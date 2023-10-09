@@ -1,4 +1,4 @@
-import { conjunctions, adjectives, nouns, verbs, adverbs, spatialPrepositions } from "./vocab.js";
+import { conjunctions, adjectives, nouns, verbs, adverbs, spatialPrepositions, questionWords } from "./vocab.js";
 
 const getRandomElement = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
@@ -50,6 +50,10 @@ const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
+const getRandomElementScaled = (arr, count) => {
+    return arr[Math.floor(Math.random() * count)];
+};
+
 const generatePhrase = (length, adjLevel = 1, nounLevel = 1, verbLevel = 1, adverbLevel = 1) => {
     const adjCount = Math.max(3, Math.floor(adjectives.length * adjLevel));
     const nounCount = Math.max(3, Math.floor(nouns.length * nounLevel));
@@ -62,10 +66,14 @@ const generatePhrase = (length, adjLevel = 1, nounLevel = 1, verbLevel = 1, adve
     let isPlural = false;
     let verb = "";
     let shouldAddConjunction = false;
+    let isQuestion = Math.random() > 0.8;  // New line
 
-    const getRandomElementScaled = (arr, count) => {
-        return arr[Math.floor(Math.random() * count)];
-    };
+  
+
+    if (isQuestion) {  // New line
+        const questionWord = getRandomElement(questionWords);
+        phrase += questionWord + " ";
+    }
 
     for (let i = 0; i < length; i++) {
         if (shouldAddConjunction && i % 4 === 0 && i > 0) {
@@ -102,12 +110,9 @@ const generatePhrase = (length, adjLevel = 1, nounLevel = 1, verbLevel = 1, adve
 
             phrase += verb + " ";
 
-            // Add a spatial preposition 30% of the time
             if (Math.random() > 0.7) {
                 const spatialPreposition = getRandomElement(spatialPrepositions);
-                if (spatialPreposition !== lastConjunction) {
-                    phrase += spatialPreposition + " ";
-                }
+                phrase += spatialPreposition + " ";
             }
 
             shouldAddConjunction = true;
@@ -118,10 +123,8 @@ const generatePhrase = (length, adjLevel = 1, nounLevel = 1, verbLevel = 1, adve
         }
     }
 
-    // Remove trailing conjunctions and commas
     phrase = phrase.replace(/, (and|or|but|so|yet|for|nor) $/, '').trim();
 
-    // Ensure the last clause is complete
     if (length % 4 !== 0) {
         const lastIndex = phrase.lastIndexOf(',');
         if (lastIndex !== -1) {
@@ -129,8 +132,11 @@ const generatePhrase = (length, adjLevel = 1, nounLevel = 1, verbLevel = 1, adve
         }
     }
 
+    if (isQuestion) {  // New line
+        return capitalizeFirstLetter(phrase) + "?";
+    }
+
     return capitalizeFirstLetter(phrase) + ".";
 };
-
 
 export default generatePhrase;
