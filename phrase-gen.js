@@ -1,4 +1,4 @@
-import { conjunctions, adjectives, nouns, verbs, adverbs } from "./vocab.js";
+import { conjunctions, adjectives, nouns, verbs, adverbs, spatialPrepositions } from "./vocab.js";
 
 const getRandomElement = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
@@ -56,7 +56,6 @@ const generatePhrase = (length, adjLevel = 1, nounLevel = 1, verbLevel = 1, adve
     const verbCount = Math.max(3, Math.floor(verbs.length * verbLevel));
     const adverbCount = Math.max(3, Math.floor(adverbs.length * adverbLevel));
 
-
     let phrase = "";
     let lastConjunction = "";
     let noun = "";
@@ -102,6 +101,15 @@ const generatePhrase = (length, adjLevel = 1, nounLevel = 1, verbLevel = 1, adve
             }
 
             phrase += verb + " ";
+
+            // Add a spatial preposition 30% of the time
+            if (Math.random() > 0.7) {
+                const spatialPreposition = getRandomElement(spatialPrepositions);
+                if (spatialPreposition !== lastConjunction) {
+                    phrase += spatialPreposition + " ";
+                }
+            }
+
             shouldAddConjunction = true;
 
             if (Math.random() > 0.5) {
@@ -109,7 +117,6 @@ const generatePhrase = (length, adjLevel = 1, nounLevel = 1, verbLevel = 1, adve
             }
         }
     }
-
 
     // Remove trailing conjunctions and commas
     phrase = phrase.replace(/, (and|or|but|so|yet|for|nor) $/, '').trim();
@@ -124,9 +131,6 @@ const generatePhrase = (length, adjLevel = 1, nounLevel = 1, verbLevel = 1, adve
 
     return capitalizeFirstLetter(phrase) + ".";
 };
-
-
-
 
 
 export default generatePhrase;
